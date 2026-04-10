@@ -3,7 +3,7 @@ import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 import {
   Undo2, Redo2, Trash2, Download, ChevronLeft, ChevronRight,
   MousePointer, Type, ImageIcon, Link, ZoomIn, ZoomOut,
-  Bold, Italic, AlignLeft, AlignCenter, AlignRight, Pen,
+  AlignLeft, AlignCenter, AlignRight, Pen,
 } from 'lucide-react'
 import ToolShell from '../../components/layout/ToolShell'
 import FileDropzone from '../../components/ui/FileDropzone'
