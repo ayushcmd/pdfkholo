@@ -1,5 +1,5 @@
 import { ShieldCheck, Zap, WifiOff, Smartphone } from 'lucide-react'
-import { Link } from 'react-router-dom'
+
 
 const features = [
   { Icon: ShieldCheck, title: 'Privacy Guaranteed', desc: 'Your files are processed entirely in your browser using WebAssembly. Nothing is ever uploaded to any server.', color: '#10B981', bg: 'rgba(16,185,129,0.1)' },

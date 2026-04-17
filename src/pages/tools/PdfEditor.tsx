@@ -580,6 +580,13 @@ export default function PdfEditor() {
               className="rounded-2xl select-none flex-1"
               style={{background:'#2a2a2a',border:'1px solid var(--border)',overflow:'auto',minHeight:0,cursor:cursorMap[tool]}}
             >
+            <div ref={panelRef}
+              className="rounded-2xl select-none flex-1"
+              style={{background:'#2a2a2a', border:'1px solid var(--border)', overflow:'auto', minHeight:0, cursor:cursorMap[tool]}}
+              onMouseMove={onMouseMove}
+              onMouseUp={onMouseUp}
+             onMouseLeave={onMouseUp}
+              ></div>
               <div style={{minWidth:'100%',minHeight:'100%',display:'flex',alignItems:'flex-start',justifyContent:'center',padding:24,boxSizing:'border-box'}}>
                 <div ref={containerRef}
                   className="relative"
@@ -643,7 +650,8 @@ export default function PdfEditor() {
                     if (el.kind==='link') {
                       const lk=el as LinkEl
                       return (
-                        <div key={lk.id} onClick={e=>{e.stopPropagation();setSelected(lk.id);setTool('select')}} onMouseDown={e=>onElMouseDown(e,lk.id)}
+                        <div key={lk.id} onClick={e=>{e.stopPropagation();setSelected(lk.id);setTool('select')}}
+                                         onDoubleClick={e=>{e.stopPropagation(); if(lk.url) window.open(lk.url,'_blank')}} onMouseDown={e=>onElMouseDown(e,lk.id)}
                           style={{position:'absolute',left:`${lk.x*100}%`,top:`${lk.y*100}%`,
                             fontSize:lk.fontSize*0.7,color:lk.color,cursor:tool==='select'?'move':'pointer',
                             fontFamily:'Dosis,sans-serif',textDecoration:'underline',userSelect:'none',zIndex:10,...sel}}>
@@ -662,7 +670,7 @@ export default function PdfEditor() {
             <div className="flex items-center gap-2 shrink-0">
               <div className="w-2 h-2 rounded-full" style={{background:'var(--accent)'}}/>
               <p className="text-xs" style={{color:'var(--text-3)'}}>
-                {tool==='select'&&'Click to select · drag to move · corner handles to resize · Del to delete'}
+                {tool==='select'&&'Click to select · drag to move · double-click link to open · Del to delete'}
                 {tool==='text'  &&'Click PDF to place text'}
                 {tool==='image' &&'Drop image in panel → drag to reposition → corner handles to resize'}
                 {tool==='link'  &&'Click PDF to place link'}
