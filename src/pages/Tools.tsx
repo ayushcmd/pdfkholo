@@ -4,14 +4,15 @@ import { useState } from 'react'
 import { ToolIcon } from '../components/ui/index'
 
 const allTools = [
-  { name: 'Compress PDF',     desc: 'Reduce file size, keep quality intact.',            href: '/tools/compress',   color: '#3B82F6', bg: 'rgba(59,130,246,0.1)',  tag: 'Popular'  },
-  { name: 'Edit PDF',         desc: 'Add text, images and annotations.',                 href: '/tools/pdf-editor', color: '#FBBF24', bg: 'rgba(251,191,36,0.1)',   tag: 'Featured' },
-  { name: 'Merge PDF',        desc: 'Combine PDFs with drag-and-drop reorder.',          href: '/tools/merge',      color: '#10B981', bg: 'rgba(16,185,129,0.1)', tag: null },
-  { name: 'Split PDF',        desc: 'Extract pages or split into separate files.',       href: '/tools/split',      color: '#F97316', bg: 'rgba(249,115,22,0.1)', tag: null },
-  { name: 'Image to PDF',     desc: 'JPG/PNG to PDF — A4 or original size.',            href: '/tools/img-to-pdf', color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)', tag: null },
-  { name: 'Remove Background',desc: 'AI-powered BG removal, fully private.',            href: '/tools/bg-remove',  color: '#EC4899', bg: 'rgba(236,72,153,0.1)', tag: 'AI' },
-  { name: 'QR Code Tools',    desc: 'Generate and scan QR codes live.',                  href: '/tools/qr',         color: '#14B8A6', bg: 'rgba(20,184,166,0.1)', tag: null },
-  { name: 'Resume Builder',   desc: 'Build and export a professional resume.',           href: '/tools/resume',     color: '#F59E0B', bg: 'rgba(245,158,11,0.1)', tag: null },
+  { name: 'Compress PDF',      desc: 'Reduce file size, keep quality intact.',             href: '/tools/compress',    color: '#3B82F6', bg: 'rgba(59,130,246,0.1)',  tag: 'Popular'  },
+  { name: 'Edit PDF',          desc: 'Add text, images and annotations.',                  href: '/tools/pdf-editor',  color: '#FBBF24', bg: 'rgba(251,191,36,0.1)',   tag: 'Featured' },
+  { name: 'Merge PDF',         desc: 'Combine PDFs with drag-and-drop reorder.',           href: '/tools/merge',       color: '#10B981', bg: 'rgba(16,185,129,0.1)',  tag: null },
+  { name: 'Split PDF',         desc: 'Extract pages or split into separate files.',        href: '/tools/split',       color: '#F97316', bg: 'rgba(249,115,22,0.1)',  tag: null },
+  { name: 'Image to PDF',      desc: 'JPG/PNG to PDF — A4 or original size.',              href: '/tools/img-to-pdf',  color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)',  tag: null },
+  { name: 'DOCX to PDF',       desc: 'Convert Word (.docx) documents to PDF quickly.',     href: '/tools/docx-to-pdf', color: '#06B6D4', bg: 'rgba(6,182,212,0.1)',   tag: 'New' },
+  { name: 'Remove Background', desc: 'AI-powered BG removal, fully private.',              href: '/tools/bg-remove',   color: '#EC4899', bg: 'rgba(236,72,153,0.1)',  tag: 'AI' },
+  { name: 'QR Code Tools',     desc: 'Generate and scan QR codes live.',                   href: '/tools/qr',          color: '#14B8A6', bg: 'rgba(20,184,166,0.1)',  tag: null },
+  { name: 'Resume Builder',    desc: 'Build and export a professional resume.',            href: '/tools/resume',      color: '#F59E0B', bg: 'rgba(245,158,11,0.1)',  tag: null },
 ]
 
 export default function Tools() {

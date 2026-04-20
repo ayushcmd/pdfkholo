@@ -3,14 +3,15 @@ import { ArrowRight } from 'lucide-react'
 import { ToolIcon } from '../ui/index'
 
 const tools = [
-  { name: 'Edit PDF',          shortDesc: 'Text, images, annotations.',    href: '/tools/pdf-editor', color: '#FBBF24', bg: 'rgba(251,191,36,0.1)',  tag: 'Hot' },
-  { name: 'Compress',          shortDesc: 'Reduce size, keep quality.',     href: '/tools/compress',   color: '#3B82F6', bg: 'rgba(59,130,246,0.1)',  tag: null },
-  { name: 'Merge PDF',         shortDesc: 'Combine with drag-and-drop.',    href: '/tools/merge',      color: '#10B981', bg: 'rgba(16,185,129,0.1)',  tag: null },
-  { name: 'Split PDF',         shortDesc: 'Extract or split pages.',        href: '/tools/split',      color: '#F97316', bg: 'rgba(249,115,22,0.1)',  tag: null },
-  { name: 'Image to PDF',      shortDesc: 'JPG/PNG to PDF.',                href: '/tools/img-to-pdf', color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)', tag: null },
-  { name: 'Remove BG',         shortDesc: 'AI-powered removal.',            href: '/tools/bg-remove',  color: '#EC4899', bg: 'rgba(236,72,153,0.1)', tag: 'AI' },
-  { name: 'QR Tools',          shortDesc: 'Generate & scan live.',          href: '/tools/qr',         color: '#14B8A6', bg: 'rgba(20,184,166,0.1)', tag: null },
-  { name: 'Resume Builder',    shortDesc: 'Export professional resume.',    href: '/tools/resume',     color: '#F59E0B', bg: 'rgba(245,158,11,0.1)', tag: null },
+  { name: 'Edit PDF',          shortDesc: 'Text, images, annotations.',    href: '/tools/pdf-editor',  color: '#FBBF24', bg: 'rgba(251,191,36,0.1)',  tag: 'Hot' },
+  { name: 'Compress',          shortDesc: 'Reduce size, keep quality.',     href: '/tools/compress',    color: '#3B82F6', bg: 'rgba(59,130,246,0.1)',  tag: null },
+  { name: 'Merge PDF',         shortDesc: 'Combine with drag-and-drop.',    href: '/tools/merge',       color: '#10B981', bg: 'rgba(16,185,129,0.1)',  tag: null },
+  { name: 'Split PDF',         shortDesc: 'Extract or split pages.',        href: '/tools/split',       color: '#F97316', bg: 'rgba(249,115,22,0.1)',  tag: null },
+  { name: 'Image to PDF',      shortDesc: 'JPG/PNG to PDF.',                href: '/tools/img-to-pdf',  color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)',  tag: null },
+  { name: 'DOCX to PDF',       shortDesc: 'Convert .docx to PDF fast.',     href: '/tools/docx-to-pdf', color: '#06B6D4', bg: 'rgba(6,182,212,0.1)',   tag: 'New' },
+  { name: 'Remove BG',         shortDesc: 'AI-powered removal.',            href: '/tools/bg-remove',   color: '#EC4899', bg: 'rgba(236,72,153,0.1)',  tag: 'AI' },
+  { name: 'QR Tools',          shortDesc: 'Generate & scan live.',          href: '/tools/qr',          color: '#14B8A6', bg: 'rgba(20,184,166,0.1)',  tag: null },
+  { name: 'Resume Builder',    shortDesc: 'Export professional resume.',    href: '/tools/resume',      color: '#F59E0B', bg: 'rgba(245,158,11,0.1)',  tag: null },
 ]
 
 export default function ToolsGrid() {

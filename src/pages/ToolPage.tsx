@@ -1,80 +1,116 @@
-import { useLocation, Link } from 'react-router-dom'
-import { ArrowLeft, Hammer } from 'lucide-react'
+import { useState } from 'react'
+import { ToolIcon } from '../components/ui/index'
 
-const toolMeta: Record<string, { emoji: string; name: string; color: string; bg: string }> = {
-  'compress':   { emoji: '🗜️', name: 'Compress PDF',       color: '#3B82F6', bg: 'rgba(59,130,246,0.1)' },
-  'pdf-editor': { emoji: '✏️', name: 'PDF Editor',          color: '#F59E0B', bg: 'rgba(245,158,11,0.1)' },
-  'merge':      { emoji: '🔗', name: 'Merge PDF',           color: '#10B981', bg: 'rgba(16,185,129,0.1)' },
-  'split':      { emoji: '✂️', name: 'Split PDF',           color: '#FBBF24', bg: 'rgba(251,191,36,0.1)'  },
-  'img-to-pdf': { emoji: '🖼️', name: 'Image to PDF',        color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)' },
-  'bg-remove':  { emoji: '🪄', name: 'Remove Background',   color: '#EC4899', bg: 'rgba(236,72,153,0.1)' },
-  'qr':         { emoji: '📱', name: 'QR Code Tools',       color: '#14B8A6', bg: 'rgba(20,184,166,0.1)' },
-  'resume':     { emoji: '📋', name: 'Resume Builder',      color: '#F97316', bg: 'rgba(249,115,22,0.1)' },
-}
+const allTools = [
+  { name: 'Compress PDF',      desc: 'Reduce file size, keep quality intact.',             href: '/tools/compress',    color: '#3B82F6', bg: 'rgba(59,130,246,0.1)',  tag: 'Popular'  },
+  { name: 'Edit PDF',          desc: 'Add text, images and annotations.',                  href: '/tools/pdf-editor',  color: '#FBBF24', bg: 'rgba(251,191,36,0.1)',   tag: 'Featured' },
+  { name: 'Merge PDF',         desc: 'Combine PDFs with drag-and-drop reorder.',           href: '/tools/merge',       color: '#10B981', bg: 'rgba(16,185,129,0.1)',  tag: null },
+  { name: 'Split PDF',         desc: 'Extract pages or split into separate files.',        href: '/tools/split',       color: '#F97316', bg: 'rgba(249,115,22,0.1)',  tag: null },
+  { name: 'Image to PDF',      desc: 'JPG/PNG to PDF — A4 or original size.',              href: '/tools/img-to-pdf',  color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)',  tag: null },
+  { name: 'DOCX to PDF',       desc: 'Convert Word (.docx) documents to PDF quickly.',     href: '/tools/docx-to-pdf', color: '#06B6D4', bg: 'rgba(6,182,212,0.1)',   tag: 'New' },
+  { name: 'Remove Background', desc: 'AI-powered BG removal, fully private.',              href: '/tools/bg-remove',   color: '#EC4899', bg: 'rgba(236,72,153,0.1)',  tag: 'AI' },
+  { name: 'QR Code Tools',     desc: 'Generate and scan QR codes live.',                   href: '/tools/qr',          color: '#14B8A6', bg: 'rgba(20,184,166,0.1)',  tag: null },
+  { name: 'Resume Builder',    desc: 'Build and export a professional resume.',            href: '/tools/resume',      color: '#F59E0B', bg: 'rgba(245,158,11,0.1)',  tag: null },
+]
 
-export default function ToolPage() {
-  const location = useLocation()
-  const slug = location.pathname.replace('/tools/', '')
-  const meta = toolMeta[slug] || { emoji: '🛠️', name: 'Tool', color: '#F59E0B', bg: 'rgba(245,158,11,0.1)' }
+export default function Tools() {
+  const [query, setQuery] = useState('')
+  const filtered = allTools.filter(
+    (t) =>
+      t.name.toLowerCase().includes(query.toLowerCase()) ||
+      t.desc.toLowerCase().includes(query.toLowerCase())
+  )
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center pt-20 px-5" style={{ background: 'var(--bg)' }}>
-      <div className="max-w-md w-full text-center flex flex-col items-center gap-6">
-
-        <div
-          className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl"
-          style={{ background: meta.bg, border: `2px solid ${meta.color}22` }}
-        >
-          {meta.emoji}
-        </div>
-
-        <div>
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Hammer size={14} style={{ color: 'var(--accent)' }} />
-            <span
-              className="text-xs font-semibold uppercase tracking-widest"
-              style={{ color: 'var(--accent)', fontFamily: 'Dosis, sans-serif' }}
-            >
-              Coming in Phase 3
-            </span>
-          </div>
-          <h1
-            className="text-3xl font-display font-800 tracking-tight"
-            style={{ fontFamily: 'Dosis, sans-serif', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.02em' }}
+    <main className="min-h-screen pt-28 pb-20 px-5 md:px-8" style={{ background: 'var(--bg)' }}>
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12 animate-fade-up">
+          <span
+            className="text-xs font-semibold uppercase tracking-widest"
+            style={{ color: 'var(--accent)', fontFamily: 'Dosis, sans-serif' }}
           >
-            {meta.name}
+            All Tools
+          </span>
+          <h1
+            className="text-4xl md:text-5xl font-display font-800 mt-3 tracking-tight"
+            style={{ fontFamily: 'Dosis, sans-serif', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.025em' }}
+          >
+            Pick your tool.
           </h1>
-          <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--text-2)' }}>
-            This tool is under active development. Phase 1 & 2 are complete — check back soon for the full implementation.
+          <p
+            className="mt-3 text-base"
+            style={{ color: 'var(--text-2)', maxWidth: '360px', margin: '12px auto 0' }}
+          >
+            All tools run locally in your browser — fast, private, free.
           </p>
         </div>
 
-        <div
-          className="w-full rounded-2xl p-5 text-left"
-          style={{ background: 'var(--bg-card)', border: '1px solid var(--border)' }}
-        >
-          <p className="text-xs font-semibold mb-3" style={{ color: 'var(--text-3)', fontFamily: 'Dosis, sans-serif' }}>
-            BUILD PROGRESS
-          </p>
-          {['Foundation & Theme ✅', 'Landing Page ✅', 'Tool Implementations 🔨', 'Polish & Mobile 📱'].map((step, i) => (
-            <div key={step} className="flex items-center gap-3 py-2" style={{ borderTop: i > 0 ? '1px solid var(--border)' : 'none' }}>
-              <div
-                className="w-2 h-2 rounded-full"
-                style={{ background: i < 2 ? '#10B981' : i === 2 ? meta.color : 'var(--border)', flexShrink: 0 }}
-              />
-              <span className="text-xs" style={{ color: i < 2 ? 'var(--text)' : 'var(--text-3)' }}>{step}</span>
-            </div>
+        <div className="max-w-xl mx-auto mb-10">
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search tools..."
+            className="w-full px-4 py-3 rounded-2xl text-sm outline-none transition-all"
+            style={{
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border)',
+              color: 'var(--text)',
+              fontFamily: 'Dosis, sans-serif',
+            }}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filtered.map((t) => (
+            <a
+              key={t.href}
+              href={t.href}
+              className="group rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1"
+              style={{
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border)',
+                boxShadow: 'var(--shadow-sm)',
+                textDecoration: 'none',
+              }}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: t.bg, color: t.color }}
+                >
+                  <ToolIcon name={t.name} size={18} />
+                </div>
+                {t.tag && (
+                  <span
+                    className="text-[10px] uppercase tracking-wider px-2 py-1 rounded-full"
+                    style={{
+                      color: t.color,
+                      background: t.bg,
+                      border: `1px solid ${t.color}33`,
+                      fontFamily: 'Dosis, sans-serif',
+                      fontWeight: 700,
+                    }}
+                  >
+                    {t.tag}
+                  </span>
+                )}
+              </div>
+
+              <h3
+                className="mt-4 text-lg leading-tight"
+                style={{ color: 'var(--text)', fontFamily: 'Dosis, sans-serif', fontWeight: 700 }}
+              >
+                {t.name}
+              </h3>
+              <p
+                className="mt-2 text-sm leading-relaxed"
+                style={{ color: 'var(--text-2)', fontFamily: 'Dosis, sans-serif' }}
+              >
+                {t.desc}
+              </p>
+            </a>
           ))}
         </div>
-
-        <Link
-          to="/tools"
-          className="flex items-center gap-2 text-sm font-medium"
-          style={{ color: 'var(--text-2)', fontFamily: 'Dosis, sans-serif' }}
-        >
-          <ArrowLeft size={15} />
-          Back to all tools
-        </Link>
       </div>
     </main>
   )
