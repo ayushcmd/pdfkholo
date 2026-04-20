@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ToolIcon } from '../components/ui/index'
+
 
 const allTools = [
   { name: 'Compress PDF',      desc: 'Reduce file size, keep quality intact.',             href: '/tools/compress',    color: '#3B82F6', bg: 'rgba(59,130,246,0.1)',  tag: 'Popular'  },
@@ -78,7 +78,7 @@ export default function Tools() {
                   className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: t.bg, color: t.color }}
                 >
-                  <ToolIcon name={t.name} size={18} />
+                
                 </div>
                 {t.tag && (
                   <span

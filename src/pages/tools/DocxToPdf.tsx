@@ -92,11 +92,7 @@ export default function DocxToPdf() {
 
       if (job?.status === 'error') {
         const failedTask = job.tasks?.find((t) => t.status === 'error')
-        throw new Error(
-          failedTask?.message ||
-            failedTask?.code ||
-            'CloudConvert job failed.'
-        )
+        throw new Error(failedTask?.message || failedTask?.code || 'CloudConvert job failed.')
       }
 
       await sleep(1500)
@@ -119,7 +115,6 @@ export default function DocxToPdf() {
     setPdfUrl('')
 
     try {
-      // 1) Create job
       const createRes = await fetch('https://api.cloudconvert.com/v2/jobs', {
         method: 'POST',
         headers: {
@@ -128,9 +123,7 @@ export default function DocxToPdf() {
         },
         body: JSON.stringify({
           tasks: {
-            'import-my-file': {
-              operation: 'import/upload',
-            },
+            'import-my-file': { operation: 'import/upload' },
             'convert-my-file': {
               operation: 'convert',
               input: 'import-my-file',
@@ -163,7 +156,6 @@ export default function DocxToPdf() {
         throw new Error('Upload URL missing from CloudConvert response.')
       }
 
-      // 2) Upload file
       const fd = new FormData()
       Object.entries(uploadForm.parameters || {}).forEach(([k, v]) => {
         fd.append(k, String(v))
@@ -180,7 +172,6 @@ export default function DocxToPdf() {
         throw new Error(txt || 'File upload failed.')
       }
 
-      // 3) Poll job status
       const finishedJob = await waitForJob(job.id)
       const exportTask = finishedJob.tasks?.find((t) => t.name === 'export-my-file')
       const url = exportTask?.result?.files?.[0]?.url
@@ -231,9 +222,7 @@ export default function DocxToPdf() {
         <FileDropzone
           onFiles={onDrop}
           accept={accept}
-          multiple={false}
           label="Drop your .docx file here"
-          helperText="Only .docx files are supported"
         />
 
         {file && (
@@ -276,7 +265,7 @@ export default function DocxToPdf() {
           disabled={!file || loading}
           className="btn-primary flex items-center justify-center gap-2 px-4 py-2.5 text-xs disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {loading ? <Spinner size={14} /> : <Cloud size={14} />}
+          {loading ? <Spinner size="sm" /> : <Cloud size={14} />}
           {loading ? 'Converting...' : 'Convert to PDF'}
         </button>
 
@@ -289,8 +278,8 @@ export default function DocxToPdf() {
           Download PDF
         </button>
 
-        {!!error && <Alert kind="error" text={error} />}
-        {!!done && <Alert kind="success" text={done} />}
+        {!!error && <Alert type="error" message={error} />}
+        {!!done && <Alert type="success" message={done} />}
       </div>
     </ToolShell>
   )
