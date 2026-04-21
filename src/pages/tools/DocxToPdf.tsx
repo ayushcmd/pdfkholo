@@ -5,27 +5,6 @@ import FileDropzone from '../../components/ui/FileDropzone'
 import { Alert, Spinner, SectionLabel } from '../../components/ui/index'
 import { checkFileSize, formatBytes } from '../../lib/fileGuard'
 
-type CloudConvertTask = {
-  id: string
-  name: string
-  status: string
-  result?: {
-    form?: {
-      url: string
-      parameters: Record<string, string>
-    }
-    files?: Array<{ url: string }>
-  }
-  message?: string
-  code?: string
-}
-
-type CloudConvertJob = {
-  id: string
-  status: string
-  tasks: CloudConvertTask[]
-}
-
 export default function DocxToPdf() {
   const [file, setFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
@@ -33,7 +12,7 @@ export default function DocxToPdf() {
   const [done, setDone] = useState('')
   const [pdfUrl, setPdfUrl] = useState('')
 
-  const apiKey = import.meta.env.VITE_CLOUDCONVERT_API_KEY as string
+  const apiSecret = import.meta.env.VITE_CONVERTAPI_SECRET as string
 
   const accept = useMemo(
     () => '.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -72,40 +51,11 @@ export default function DocxToPdf() {
     setPdfUrl('')
   }
 
-  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
-
-  const waitForJob = async (jobId: string): Promise<CloudConvertJob> => {
-    for (let i = 0; i < 45; i++) {
-      const res = await fetch(`https://api.cloudconvert.com/v2/jobs/${jobId}`, {
-        headers: { Authorization: `Bearer ${apiKey}` },
-      })
-
-      if (!res.ok) {
-        const txt = await res.text()
-        throw new Error(txt || 'Failed to poll conversion job.')
-      }
-
-      const data = await res.json()
-      const job: CloudConvertJob = data?.data
-
-      if (job?.status === 'finished') return job
-
-      if (job?.status === 'error') {
-        const failedTask = job.tasks?.find((t) => t.status === 'error')
-        throw new Error(failedTask?.message || failedTask?.code || 'CloudConvert job failed.')
-      }
-
-      await sleep(1500)
-    }
-
-    throw new Error('Conversion timed out. Please try again.')
-  }
-
   const convert = async () => {
     if (!file) return
 
-    if (!apiKey) {
-      setError('Missing VITE_CLOUDCONVERT_API_KEY in .env')
+    if (!apiSecret) {
+      setError('Missing VITE_CONVERTAPI_SECRET in .env')
       return
     }
 
@@ -115,70 +65,29 @@ export default function DocxToPdf() {
     setPdfUrl('')
 
     try {
-      const createRes = await fetch('https://api.cloudconvert.com/v2/jobs', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          tasks: {
-            'import-my-file': { operation: 'import/upload' },
-            'convert-my-file': {
-              operation: 'convert',
-              input: 'import-my-file',
-              input_format: 'docx',
-              output_format: 'pdf',
-              optimize_print: true,
-            },
-            'export-my-file': {
-              operation: 'export/url',
-              input: 'convert-my-file',
-              inline: false,
-              archive_multiple_files: false,
-            },
-          },
-          tag: 'docx-to-pdf',
-        }),
-      })
-
-      if (!createRes.ok) {
-        const txt = await createRes.text()
-        throw new Error(txt || 'Failed to create conversion job.')
-      }
-
-      const created = await createRes.json()
-      const job: CloudConvertJob = created?.data
-      const importTask = job?.tasks?.find((t) => t.name === 'import-my-file')
-      const uploadForm = importTask?.result?.form
-
-      if (!uploadForm?.url) {
-        throw new Error('Upload URL missing from CloudConvert response.')
-      }
-
       const fd = new FormData()
-      Object.entries(uploadForm.parameters || {}).forEach(([k, v]) => {
-        fd.append(k, String(v))
-      })
-      fd.append('file', file)
+      fd.append('File', file)
+      fd.append('StoreFile', 'true')
 
-      const uploadRes = await fetch(uploadForm.url, {
+      const res = await fetch(`https://v2.convertapi.com/convert/docx/to/pdf?Secret=${apiSecret}`, {
         method: 'POST',
         body: fd,
       })
 
-      if (!uploadRes.ok) {
-        const txt = await uploadRes.text()
-        throw new Error(txt || 'File upload failed.')
+      const raw = await res.text()
+      let data: any = null
+      try {
+        data = JSON.parse(raw)
+      } catch {
+        throw new Error(raw || 'Conversion failed')
       }
 
-      const finishedJob = await waitForJob(job.id)
-      const exportTask = finishedJob.tasks?.find((t) => t.name === 'export-my-file')
-      const url = exportTask?.result?.files?.[0]?.url
-
-      if (!url) {
-        throw new Error('PDF URL not found after conversion.')
+      if (!res.ok) {
+        throw new Error(data?.Message || data?.message || 'Conversion failed')
       }
+
+      const url = data?.Files?.[0]?.Url
+      if (!url) throw new Error('PDF URL not found in ConvertAPI response')
 
       setPdfUrl(url)
       setDone('Conversion complete. Click Download PDF.')
@@ -206,7 +115,7 @@ export default function DocxToPdf() {
           fontFamily: 'Dosis, sans-serif',
         }}
       >
-        Upload DOCX → CloudConvert converts → Download final PDF.
+        Upload DOCX → ConvertAPI converts → Download final PDF.
       </div>
     </div>
   )
@@ -214,7 +123,7 @@ export default function DocxToPdf() {
   return (
     <ToolShell
       title="DOCX to PDF"
-      subtitle="Accurate conversion using CloudConvert"
+      subtitle="Accurate conversion using ConvertAPI"
       slug="docx-to-pdf"
       options={options}
     >
