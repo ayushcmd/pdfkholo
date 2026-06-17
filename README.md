@@ -58,4 +58,4 @@ Build settings (default Vite):
 
 ---
 
-<p align="center">Made with ☕ by <a href="https://ayushcmd.me">Ayush Raj</a></p>
+<p align="center">Made with  by <a href="https://ayushcmd.me">Ayush Raj</a></p>
