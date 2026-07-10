@@ -12,6 +12,17 @@ import QrTools from './pages/tools/QrTools'
 import Resume from './pages/tools/Resume'
 import PdfEditor from './pages/tools/PdfEditor'
 import DocxToPdf from './pages/tools/DocxToPdf'
+import ImageResize from './pages/tools/ImageResize'
+import ImageFilters from './pages/tools/ImageFilters'
+import ImageCrop from './pages/tools/ImageCrop'
+import AddBackground from './pages/tools/AddBackground'
+import BulkResize from './pages/tools/BulkResize'
+import ImageWatermark from './pages/tools/ImageWatermark'
+import RotatePdf from './pages/tools/RotatePdf'
+import WatermarkPdf from './pages/tools/WatermarkPdf'
+import PdfToImage from './pages/tools/PdfToImage'
+import PdfProtect from './pages/tools/PdfProtect'
+import PdfUnlock from './pages/tools/PdfUnlock'
 
 export default function App() {
   return (
@@ -29,6 +40,17 @@ export default function App() {
         <Route path="/tools/bg-remove" element={<BgRemove />} />
         <Route path="/tools/qr" element={<QrTools />} />
         <Route path="/tools/resume" element={<Resume />} />
+        <Route path="/tools/image-resize" element={<ImageResize />} />
+        <Route path="/tools/image-filters" element={<ImageFilters />} />
+        <Route path="/tools/image-crop" element={<ImageCrop />} />
+        <Route path="/tools/add-bg" element={<AddBackground />} />
+        <Route path="/tools/bulk-resize" element={<BulkResize />} />
+        <Route path="/tools/image-watermark" element={<ImageWatermark />} />
+        <Route path="/tools/rotate-pdf" element={<RotatePdf />} />
+        <Route path="/tools/watermark-pdf" element={<WatermarkPdf />} />
+        <Route path="/tools/pdf-to-image" element={<PdfToImage />} />
+        <Route path="/tools/pdf-protect" element={<PdfProtect />} />
+        <Route path="/tools/pdf-unlock" element={<PdfUnlock />} />
       </Routes>
       <Footer />
     </BrowserRouter>

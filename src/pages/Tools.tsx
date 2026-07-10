@@ -13,6 +13,17 @@ const allTools = [
   { name: 'Remove Background', desc: 'AI-powered BG removal, fully private.',              href: '/tools/bg-remove',   color: '#EC4899', bg: 'rgba(236,72,153,0.1)',  tag: 'AI' },
   { name: 'QR Code Tools',     desc: 'Generate and scan QR codes live.',                   href: '/tools/qr',          color: '#14B8A6', bg: 'rgba(20,184,166,0.1)',  tag: null },
   { name: 'Resume Builder',    desc: 'Build and export a professional resume.',            href: '/tools/resume',      color: '#F59E0B', bg: 'rgba(245,158,11,0.1)',  tag: null },
+  { name: 'Image Resizer',     desc: 'Resize images by pixels or percentage.',             href: '/tools/image-resize',color: '#22D3EE', bg: 'rgba(34,211,238,0.1)',  tag: null },
+  { name: 'Image Filters',     desc: 'Adjust brightness, contrast, saturation and presets.',href: '/tools/image-filters',color: '#A78BFA', bg: 'rgba(167,139,250,0.1)', tag: null },
+  { name: 'Image Cropper',     desc: 'Crop images freehand or with fixed-ratio presets.',  href: '/tools/image-crop',  color: '#FB7185', bg: 'rgba(251,113,133,0.1)', tag: null },
+  { name: 'Add Background',    desc: 'Add solid color or gradient behind transparent images.', href: '/tools/add-bg',  color: '#34D399', bg: 'rgba(52,211,153,0.1)',  tag: null },
+  { name: 'Bulk Image Resize', desc: 'Resize multiple images at once, download as ZIP.',   href: '/tools/bulk-resize', color: '#60A5FA', bg: 'rgba(96,165,250,0.1)', tag: null },
+  { name: 'Image Watermark',   desc: 'Add a text or logo watermark to your photos.',       href: '/tools/image-watermark', color: '#FBBF24', bg: 'rgba(251,191,36,0.1)', tag: null },
+  { name: 'Rotate PDF Pages',  desc: 'Rotate individual or all pages by 90°.',             href: '/tools/rotate-pdf',  color: '#F97316', bg: 'rgba(249,115,22,0.1)', tag: null },
+  { name: 'Watermark PDF',     desc: 'Add a text watermark to every page.',                href: '/tools/watermark-pdf', color: '#EAB308', bg: 'rgba(234,179,8,0.1)', tag: null },
+  { name: 'PDF to Image',      desc: 'Export each PDF page as JPG or PNG.',                href: '/tools/pdf-to-image', color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)', tag: null },
+  { name: 'PDF Password Protect', desc: 'Add password encryption before download.',        href: '/tools/pdf-protect', color: '#EF4444', bg: 'rgba(239,68,68,0.1)', tag: null },
+  { name: 'PDF Unlock',        desc: 'Remove password protection from a PDF.',             href: '/tools/pdf-unlock',  color: '#10B981', bg: 'rgba(16,185,129,0.1)', tag: null },
 ]
 
 export default function Tools() {
