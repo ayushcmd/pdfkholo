@@ -55,7 +55,7 @@ export default function OcrPdf() {
         canvas.width = viewport.width
         canvas.height = viewport.height
         const ctx = canvas.getContext('2d')!
-        await page.render({ canvasContext: ctx, viewport }).promise
+        await page.render({ canvasContext: ctx, viewport, canvas }).promise
 
         const { data } = await worker.recognize(canvas)
         fullText += `--- Page ${i} ---\n${data.text.trim()}\n\n`

@@ -56,7 +56,7 @@ export default function SignPdf() {
     canvas.width = viewport.width
     canvas.height = viewport.height
     const ctx = canvas.getContext('2d')!
-    await page.render({ canvasContext: ctx, viewport }).promise
+    await page.render({ canvasContext: ctx, viewport, canvas }).promise
     setPageImg(canvas.toDataURL())
     setPageDims({ width: viewport.width, height: viewport.height })
   }
@@ -158,7 +158,7 @@ export default function SignPdf() {
       targetPage.drawImage(pngImage, { x, y, width: drawW, height: drawH })
 
       const bytes = await pdfDoc.save()
-      setSignedBlob(new Blob([bytes], { type: 'application/pdf' }))
+      setSignedBlob(new Blob([bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)], { type: 'application/pdf' }))
       setStatus('done')
     } catch (err) {
       console.error(err)

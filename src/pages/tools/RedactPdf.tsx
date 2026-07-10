@@ -42,7 +42,7 @@ export default function RedactPdf() {
     canvas.width = viewport.width
     canvas.height = viewport.height
     const ctx = canvas.getContext('2d')!
-    await page.render({ canvasContext: ctx, viewport }).promise
+    await page.render({ canvasContext: ctx, viewport, canvas }).promise
     setPageImg(canvas.toDataURL())
   }
 
@@ -136,7 +136,7 @@ export default function RedactPdf() {
       })
 
       const bytes = await pdfDoc.save()
-      setResultBlob(new Blob([bytes], { type: 'application/pdf' }))
+      setResultBlob(new Blob([bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)], { type: 'application/pdf' }))
       setStatus('done')
     } catch (err) {
       console.error(err)
