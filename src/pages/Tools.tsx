@@ -24,6 +24,11 @@ const allTools = [
   { name: 'PDF to Image',      desc: 'Export each PDF page as JPG or PNG.',                href: '/tools/pdf-to-image', color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)', tag: null },
   { name: 'PDF Password Protect', desc: 'Add password encryption before download.',        href: '/tools/pdf-protect', color: '#EF4444', bg: 'rgba(239,68,68,0.1)', tag: null },
   { name: 'PDF Unlock',        desc: 'Remove password protection from a PDF.',             href: '/tools/pdf-unlock',  color: '#10B981', bg: 'rgba(16,185,129,0.1)', tag: null },
+  { name: 'PDF to Word',       desc: 'Convert PDF into an editable .docx file.',           href: '/tools/pdf-to-word', color: '#06B6D4', bg: 'rgba(6,182,212,0.1)', tag: 'New' },
+  { name: 'PDF to Excel',      desc: 'Extract tables from PDF into an .xlsx file.',        href: '/tools/pdf-to-excel', color: '#10B981', bg: 'rgba(16,185,129,0.1)', tag: 'New' },
+  { name: 'Sign PDF',          desc: 'Draw, type, or upload a signature onto your PDF.',   href: '/tools/sign-pdf',    color: '#F59E0B', bg: 'rgba(245,158,11,0.1)', tag: 'New' },
+  { name: 'OCR PDF',           desc: 'Extract text from scanned or image-based PDFs.',     href: '/tools/ocr-pdf',     color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)', tag: 'New' },
+  { name: 'Redact PDF',        desc: 'Permanently black out sensitive text or regions.',   href: '/tools/redact-pdf',  color: '#EF4444', bg: 'rgba(239,68,68,0.1)', tag: 'New' },
 ]
 
 export default function Tools() {

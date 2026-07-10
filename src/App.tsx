@@ -23,6 +23,11 @@ import WatermarkPdf from './pages/tools/WatermarkPdf'
 import PdfToImage from './pages/tools/PdfToImage'
 import PdfProtect from './pages/tools/PdfProtect'
 import PdfUnlock from './pages/tools/PdfUnlock'
+import PdfToWord from './pages/tools/PdfToWord'
+import PdfToExcel from './pages/tools/PdfToExcel'
+import SignPdf from './pages/tools/SignPdf'
+import OcrPdf from './pages/tools/OcrPdf'
+import RedactPdf from './pages/tools/RedactPdf'
 
 export default function App() {
   return (
@@ -51,6 +56,11 @@ export default function App() {
         <Route path="/tools/pdf-to-image" element={<PdfToImage />} />
         <Route path="/tools/pdf-protect" element={<PdfProtect />} />
         <Route path="/tools/pdf-unlock" element={<PdfUnlock />} />
+        <Route path="/tools/pdf-to-word" element={<PdfToWord />} />
+        <Route path="/tools/pdf-to-excel" element={<PdfToExcel />} />
+        <Route path="/tools/sign-pdf" element={<SignPdf />} />
+        <Route path="/tools/ocr-pdf" element={<OcrPdf />} />
+        <Route path="/tools/redact-pdf" element={<RedactPdf />} />
       </Routes>
       <Footer />
     </BrowserRouter>
