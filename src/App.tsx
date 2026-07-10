@@ -28,6 +28,10 @@ import PdfToExcel from './pages/tools/PdfToExcel'
 import SignPdf from './pages/tools/SignPdf'
 import OcrPdf from './pages/tools/OcrPdf'
 import RedactPdf from './pages/tools/RedactPdf'
+import PassportPhoto from './pages/tools/PassportPhoto'
+import IdPhoto from './pages/tools/IdPhoto'
+import ImageCompress from './pages/tools/ImageCompress'
+import ImageConvert from './pages/tools/ImageConvert'
 
 export default function App() {
   return (
@@ -61,6 +65,10 @@ export default function App() {
         <Route path="/tools/sign-pdf" element={<SignPdf />} />
         <Route path="/tools/ocr-pdf" element={<OcrPdf />} />
         <Route path="/tools/redact-pdf" element={<RedactPdf />} />
+        <Route path="/tools/passport-photo" element={<PassportPhoto />} />
+        <Route path="/tools/id-photo" element={<IdPhoto />} />
+        <Route path="/tools/image-compress" element={<ImageCompress />} />
+        <Route path="/tools/image-convert" element={<ImageConvert />} />
       </Routes>
       <Footer />
     </BrowserRouter>

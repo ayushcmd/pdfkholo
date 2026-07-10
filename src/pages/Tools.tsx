@@ -29,6 +29,10 @@ const allTools = [
   { name: 'Sign PDF',          desc: 'Draw, type, or upload a signature onto your PDF.',   href: '/tools/sign-pdf',    color: '#F59E0B', bg: 'rgba(245,158,11,0.1)', tag: 'New' },
   { name: 'OCR PDF',           desc: 'Extract text from scanned or image-based PDFs.',     href: '/tools/ocr-pdf',     color: '#8B5CF6', bg: 'rgba(139,92,246,0.1)', tag: 'New' },
   { name: 'Redact PDF',        desc: 'Permanently black out sensitive text or regions.',   href: '/tools/redact-pdf',  color: '#EF4444', bg: 'rgba(239,68,68,0.1)', tag: 'New' },
+  { name: 'Passport Photo Maker', desc: 'Country presets with print-ready A4 sheet.',      href: '/tools/passport-photo', color: '#0EA5E9', bg: 'rgba(14,165,233,0.1)', tag: 'New' },
+  { name: 'ID Card Photo Maker',  desc: 'PAN, Aadhaar and college ID photo presets.',      href: '/tools/id-photo',    color: '#D946EF', bg: 'rgba(217,70,239,0.1)', tag: 'New' },
+  { name: 'Image Compressor',     desc: 'Compress JPG/PNG/WEBP with quality control.',     href: '/tools/image-compress', color: '#84CC16', bg: 'rgba(132,204,22,0.1)', tag: 'New' },
+  { name: 'Image Format Converter', desc: 'Convert between JPG, PNG, WEBP, BMP formats.',  href: '/tools/image-convert', color: '#F472B6', bg: 'rgba(244,114,182,0.1)', tag: 'New' },
 ]
 
 export default function Tools() {
@@ -52,7 +56,6 @@ export default function Tools() {
           </p>
         </div>
 
-        {/* Search */}
         <div className="relative max-w-md mx-auto mb-10 animate-fade-up-delay">
           <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: 'var(--text-3)' }} />
           <input
