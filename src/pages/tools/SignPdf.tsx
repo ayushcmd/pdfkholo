@@ -158,7 +158,9 @@ export default function SignPdf() {
       targetPage.drawImage(pngImage, { x, y, width: drawW, height: drawH })
 
       const bytes = await pdfDoc.save()
-      setSignedBlob(new Blob([bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)], { type: 'application/pdf' }))
+      const outBuffer = new ArrayBuffer(bytes.byteLength)
+      new Uint8Array(outBuffer).set(bytes)
+      setSignedBlob(new Blob([outBuffer], { type: 'application/pdf' }))
       setStatus('done')
     } catch (err) {
       console.error(err)

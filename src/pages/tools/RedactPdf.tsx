@@ -136,7 +136,9 @@ export default function RedactPdf() {
       })
 
       const bytes = await pdfDoc.save()
-      setResultBlob(new Blob([bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)], { type: 'application/pdf' }))
+      const outBuffer = new ArrayBuffer(bytes.byteLength)
+      new Uint8Array(outBuffer).set(bytes)
+      setResultBlob(new Blob([outBuffer], { type: 'application/pdf' }))
       setStatus('done')
     } catch (err) {
       console.error(err)
